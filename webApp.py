@@ -1,9 +1,14 @@
 from gunicorn.app.wsgiapp import WSGIApplication
 from flask import Flask
-from decouple import config
+from dotenv import load_dotenv
+from bot.get_config import get_config
 
-PORT = config("PORT", default=None)
 
+# apparently, no error appears even if the path does not exists
+load_dotenv("config.env")
+
+PORT = get_config("PORT", '8082')
+# print(PORT)
 # Function that create the app
 
 

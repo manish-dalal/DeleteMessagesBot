@@ -1,4 +1,5 @@
 echo "starting Bot ~@DroneBots";
+# export PORT=8083
 echo $PORT
 kill -9 $(lsof -t -i:$PORT)
 nohup python3 webApp.py > save_pid.txt >&1 &
