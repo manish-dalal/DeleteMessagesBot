@@ -8,6 +8,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 ### [Video Tutorial 🎥](https://youtu.be/RHQ-RP4_pKY)
 
+https://github.com/SpEcHiDe/CheckRestrictionsBot
 
 ## Credits, and Thanks to
 

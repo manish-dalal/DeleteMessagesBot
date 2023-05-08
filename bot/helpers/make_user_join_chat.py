@@ -22,6 +22,7 @@ from pyrogram.errors import (
 )
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import Message
+from pyrogram.types import ChatPrivileges
 from bot.bot import Bot
 
 
@@ -39,20 +40,28 @@ async def make_chat_user_join(
         return False, str(e)
     await sleep(7)
     _existing_permissions = await message.chat.get_member(user_id)
+    # print(ChatMemberStatus.OWNER)
+    # print('_existing_permissions')
+    # print(_existing_permissions)
+    # print(_existing_permissions.privileges)
+
     if _existing_permissions.status == ChatMemberStatus.OWNER:
         return True, 140
-    if not _existing_permissions.can_delete_messages:
-        await message.chat.promote_member(
-            user_id,
-            can_manage_chat=False,
+    if not _existing_permissions.privileges:
+        privilages=ChatPrivileges(can_manage_chat=False,
+            can_delete_messages=True,
+            can_manage_video_chats=False,
+            can_restrict_members=False,
+            can_promote_members=False,
             can_change_info=False,
             can_post_messages=False,
             can_edit_messages=False,
-            can_delete_messages=True,
-            can_restrict_members=False,
             can_invite_users=False,
             can_pin_messages=False,
-            can_promote_members=False,
-            can_manage_voice_chats=False
+            is_anonymous=False)
+        
+        await message.chat.promote_member(
+            user_id,
+            privilages
         )
     return True, None
